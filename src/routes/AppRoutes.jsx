@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from '../layouts/AppLayout';
 import ProjectListPage from '../pages/ProjectListPage';
+import SettingsPage from '../pages/SettingsPage';
 import BoardPage from '../pages/BoardPage';
 import BacklogPage from '../pages/BacklogPage';
-import SettingsPage from '../pages/SettingsPage';
 
 function AppRoutes() {
   return (
@@ -13,7 +13,6 @@ function AppRoutes() {
         <Route path="/projects/:projectId/board" element={<BoardPage />} />
         <Route path="/projects/:projectId/backlog" element={<BacklogPage />} />
         <Route path="/projects/:projectId/settings" element={<SettingsPage />} />
-        <Route path="/projects/:projectId/backlog" element={<BacklogPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
