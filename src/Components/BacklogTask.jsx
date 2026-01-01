@@ -1,14 +1,27 @@
-function BacklogTask({ task }) {
-  return (
-    <div className="bg-base-100 p-3 rounded shadow hover:shadow-md transition">
-      <div className="flex justify-between items-center">
-        <h3 className="font-semibold">{task.title}</h3>
-        <span className="badge badge-outline">{task.priority}</span>
-      </div>
+import { useDraggable } from '@dnd-kit/core';
 
-      <p className="text-sm opacity-70 mt-1">
-        {task.description || 'No description'}
-      </p>
+function BacklogTask({ task }) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task.id,
+    data: { from: 'backlog' }
+  });
+
+  const style = {
+    transform: transform
+      ? `translate(${transform.x}px, ${transform.y}px)`
+      : undefined
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="bg-base-100 p-3 rounded shadow cursor-grab"
+    >
+      <h3 className="font-semibold">{task.title}</h3>
+      <p className="text-sm opacity-70">{task.description || 'No description'}</p>
     </div>
   );
 }
