@@ -6,8 +6,8 @@ import {
   useSensors
 } from '@dnd-kit/core';
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable';
-// import BoardColumn from '../BoardColumn';
 import useAppStore from '../../store/useAppStore';
+import BoardColumn from './BoardColumn';
 
 function BoardCanvas({ project, tasks }) {
   const reorderTasks = useAppStore(s => s.reorderTasks);

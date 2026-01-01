@@ -1,6 +1,6 @@
-// import TaskModal from '../TaskModal';
-// import TaskDetailsPanel from '../TaskDetailsPanel';
+import TaskDetailsPanel from './TaskDetailsPanel';
 import useAppStore from '../../store/useAppStore';
+import TaskModal from './TaskModal';
 
 function BoardOverlays({
   projectId,
