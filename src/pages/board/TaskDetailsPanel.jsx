@@ -6,18 +6,44 @@ function TaskDetailsPanel({ taskId, onClose }) {
   if (!task) return null;
 
   return (
-    <div className="fixed right-0 top-0 h-full w-80 bg-base-200 shadow-lg p-4 z-50 overflow-auto">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-bold">{task.title}</h3>
-        <button className="btn btn-sm btn-ghost" onClick={onClose}>X</button>
-      </div>
+    <>
+      {/* Blurred overlay */}
+      <div
+        className="fixed inset-0 backdrop-blur-sm bg-black/20 z-40"
+        onClick={onClose}
+      ></div>
 
-      <p className="mb-2"><strong>Description:</strong> {task.description || '-'}</p>
-      <p className="mb-2"><strong>Priority:</strong> {task.priority}</p>
-      <p className="mb-2"><strong>Type:</strong> {task.type}</p>
-      <p className="mb-2"><strong>Assignee:</strong> {task.assignee || 'Unassigned'}</p>
-      <p className="mb-2"><strong>Column:</strong> {task.column}</p>
-    </div>
+      {/* Centered Card */}
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="bg-base-100 rounded-xl shadow-xl w-full max-w-md p-6 flex flex-col gap-4">
+          <div className="flex justify-between items-center border-b pb-2 mb-4">
+            <h3 className="text-xl font-bold">{task.title}</h3>
+            <button className="btn btn-ghost btn-sm" onClick={onClose}>X</button>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <p><strong>Description:</strong></p>
+            <p className="whitespace-pre-wrap">{task.description || '-'}</p>
+
+            <div className="flex flex-wrap gap-2">
+              <span className="badge badge-outline">Priority: {task.priority}</span>
+              <span className="badge badge-outline">Type: {task.type}</span>
+              <span className="badge badge-outline">Column: {task.column}</span>
+              <span className="badge badge-outline">Assignee: {task.assignee || 'Unassigned'}</span>
+            </div>
+
+            <div className="mt-4">
+              <h4 className="font-semibold mb-2">Subtasks</h4>
+              <ul className="list-disc pl-5">
+                {task.subtasks?.length
+                  ? task.subtasks.map(st => <li key={st.id}>{st.title}</li>)
+                  : <li>No subtasks</li>}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

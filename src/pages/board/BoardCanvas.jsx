@@ -1,15 +1,9 @@
-import {
-  DndContext,
-  closestCenter,
-  PointerSensor,
-  useSensor,
-  useSensors
-} from '@dnd-kit/core';
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable';
-import useAppStore from '../../store/useAppStore';
 import BoardColumn from './BoardColumn';
+import useAppStore from '../../store/useAppStore';
 
-function BoardCanvas({ project, tasks }) {
+function BoardCanvas({ project, tasks, onTaskClick }) {
   const reorderTasks = useAppStore(s => s.reorderTasks);
 
   const sensors = useSensors(
@@ -28,15 +22,8 @@ function BoardCanvas({ project, tasks }) {
   };
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-    >
-      <SortableContext
-        items={project.columns}
-        strategy={horizontalListSortingStrategy}
-      >
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={project.columns} strategy={horizontalListSortingStrategy}>
         <div className="flex gap-4 p-4 min-h-[70vh] overflow-x-auto">
           {project.columns.map(col => (
             <BoardColumn
@@ -44,6 +31,7 @@ function BoardCanvas({ project, tasks }) {
               column={col}
               projectId={project.id}
               tasks={tasks.filter(t => t.column === col)}
+              onTaskClick={onTaskClick}
             />
           ))}
         </div>

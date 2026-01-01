@@ -18,7 +18,7 @@ function BoardPage() {
 
   if (!project) return <p className="p-4">Project not found</p>;
 
-  const assignees = ['Alice', 'Bob', 'Charlie, Dana, Evan, Fiona, George'];
+  const assignees = ['Alice', 'Bob', 'Charlie'];
 
   return (
     <div className="flex flex-col h-full">
@@ -33,19 +33,19 @@ function BoardPage() {
       />
 
       <BoardCanvas
-        project={project}
-        tasks={tasks}
-      />
-
-      <BoardOverlays
-        projectId={projectId}
-        columns={project.columns}
-        assignees={assignees}
-        modalOpen={modalOpen}
-        closeModal={() => setModalOpen(false)}
-        selectedTaskId={selectedTaskId}
-        closeDetails={() => setSelectedTaskId(null)}
-      />
+  project={project}
+  tasks={tasks}
+  onTaskClick={setSelectedTaskId} // clicking any card opens details
+/>
+<BoardOverlays
+  projectId={projectId}
+  columns={project.columns}
+  assignees={assignees}
+  modalOpen={modalOpen}
+  closeModal={() => setModalOpen(false)}
+  selectedTaskId={selectedTaskId}
+  closeDetails={() => setSelectedTaskId(null)}
+/>
     </div>
   );
 }

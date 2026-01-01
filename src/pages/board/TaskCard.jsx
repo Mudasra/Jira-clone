@@ -1,4 +1,14 @@
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
 function TaskCard({ task, onClick }) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: task.id, data: { column: task.column } });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition
+  };
+
   const priorityColor = {
     Low: 'badge-success',
     Medium: 'badge-warning',
@@ -7,6 +17,10 @@ function TaskCard({ task, onClick }) {
 
   return (
     <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
       className="bg-base-100 p-2 rounded shadow cursor-pointer hover:shadow-lg"
       onClick={onClick}
     >

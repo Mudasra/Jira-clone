@@ -35,7 +35,7 @@ function TaskModal({ isOpen, onClose, onSubmit, columns, assignees, task }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 backdrop-blur-sm bg-black/20 z-40 flex items-center justify-center">
       <form
         className="bg-base-100 p-6 rounded shadow-md w-96 flex flex-col gap-2"
         onSubmit={handleSubmit}
