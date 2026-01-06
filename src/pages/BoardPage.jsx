@@ -67,6 +67,8 @@ function BoardPage() {
         selectedTaskId={selectedTaskId}
         closeDetails={() => setSelectedTaskId(null)}
       />
+
+      
     </div>
   );
 }
